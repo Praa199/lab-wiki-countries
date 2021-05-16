@@ -1,7 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-function countryDetails() {
+function countryDetails(props) {
+  const { capital, area, borders } = props;
+  console.log(capital, area, borders);
+
   return (
     <div className="col-7">
       {' '}
@@ -11,12 +14,12 @@ function countryDetails() {
         <tbody>
           <tr>
             <td style={{ width: '30%' }}>Capital</td>
-            <td>Dynamic Capital</td>
+            <td>{capital}</td>
           </tr>
           <tr>
             <td>Area</td>
             <td>
-              Dynamic Area
+              {area}
               <sup>2</sup>
             </td>
           </tr>
@@ -25,7 +28,7 @@ function countryDetails() {
             <td>
               <ul>
                 <li>
-                  <a href="/"> Dynamic Border</a>
+                  <a href="/"> {borders}</a>
                 </li>
               </ul>
             </td>

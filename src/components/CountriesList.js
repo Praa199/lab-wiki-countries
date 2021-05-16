@@ -1,10 +1,11 @@
 import React from 'react';
-import countriesList from '../countries.json';
 import { Link } from 'react-router-dom';
 
 // let newCountries = countriesList;
 
-function CountriesList() {
+function CountriesList(props) {
+  const { name } = props;
+  console.log(name);
   return (
     <div className="col-5">
       {' '}
@@ -14,7 +15,7 @@ function CountriesList() {
         return <div>{singleNewCountry.name} </div>;
       })} */}
       <a className="list-group-item list-group-item-action" href="/">
-        Country
+        {name}
       </a>
     </div>
   );
