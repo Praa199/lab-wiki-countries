@@ -1,9 +1,15 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import countries from '../countries.json';
 
 function countryDetails(props) {
-  const { capital, area, borders } = props;
-  console.log(capital, area, borders);
+  const singleCountryDet = countries.find(
+    (singCountry) => singCountry.cca3 === props.match.params.id
+  );
+
+  console.log('borders***', singleCountryDet.borders);
+  console.log('singleCountryDet***', singleCountryDet.cca3);
+  console.log('singleCountryDet cca3***', props.match.params.id);
 
   return (
     <div className="col-7">
@@ -14,12 +20,12 @@ function countryDetails(props) {
         <tbody>
           <tr>
             <td style={{ width: '30%' }}>Capital</td>
-            <td>{capital}</td>
+            <td>{singleCountryDet.capital[0]}</td>
           </tr>
           <tr>
             <td>Area</td>
             <td>
-              {area}
+              {singleCountryDet.area} km
               <sup>2</sup>
             </td>
           </tr>
@@ -27,9 +33,20 @@ function countryDetails(props) {
             <td>Borders</td>
             <td>
               <ul>
-                <li>
-                  <a href="/"> {borders}</a>
-                </li>
+                {singleCountryDet.borders.map((borderCountry) => {
+                  console.log(singleCountryDet.borders, borderCountry);
+                  return (
+                    <li key={borderCountry}>
+                      <Link to={`/${borderCountry}`}>
+                        {' '}
+                        {
+                          countries.find((el) => el.cca3 === borderCountry)
+                            ?.name.common
+                        }
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </td>
           </tr>
